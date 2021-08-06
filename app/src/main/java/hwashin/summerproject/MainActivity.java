@@ -12,6 +12,7 @@ import android.widget.Toolbar;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.MenuItemCompat;
 import androidx.navigation.NavController;
@@ -48,19 +49,14 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.gps_menu,menu);
-
-        //리스너 생성
-        MenuItem item = menu.findItem(R.id.map_menu);
-        ActionBarListener listener = new ActionBarListener();
-        item.setOnMenuItemClickListener(listener);
         return true;
     }
-    class ActionBarListener implements MenuItem.OnMenuItemClickListener{
-        @Override
-        public boolean onMenuItemClick(MenuItem item) {
-            Intent intent = new Intent(MainActivity.this,MapActivity.class);
-            startActivity(intent);
-            return true;
-        }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Intent intent = new Intent(this,MapActivity.class);
+        startActivity(intent);
+        return true;
     }
+
 }

@@ -1,6 +1,5 @@
 package hwashin.summerproject;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 
@@ -19,21 +18,19 @@ public class MapActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-        ActionBar action = getSupportActionBar();
         //action.setDisplayHomeAsUpEnabled(false);
         //action.setDisplayShowHomeEnabled(false);
         //action.setDisplayShowTitleEnabled(false);
         text1 = (TextView)findViewById(R.id.onquery);
     }
-    /*
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.search_menu,menu);
 
-        MenuItem search = menu.findItem(R.id.search);
-        SearchView search_view = (SearchView)search.getActionView();
+        final MenuItem search = menu.findItem(R.id.search);
+        final SearchView search_view = (SearchView)search.getActionView();
         search_view  .setQueryHint("검색");
 
         SearchViewListener listener = new SearchViewListener();
@@ -41,6 +38,7 @@ public class MapActivity extends AppCompatActivity {
 
         return true;
     }
+
     class SearchViewListener implements SearchView.OnQueryTextListener{
         @Override
         public boolean onQueryTextChange(String newText) {
@@ -57,5 +55,5 @@ public class MapActivity extends AppCompatActivity {
             return false;
         }
     }
-    */
+
 }
