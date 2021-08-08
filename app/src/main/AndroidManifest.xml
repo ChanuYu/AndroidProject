@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="hwashin.summerproject">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
         android:allowBackup="true"
@@ -8,7 +10,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.SummerProject">
+        android:theme="@style/Theme.SummerProject"
+        android:usesCleartextTraffic="true"
+        android:networkSecurityConfig="@xml/network_security_config">
+        <meta-data android:name="com.kakao.sdk.AppKey" android:value="e02a9b647be48a16d80992e9a46af5b6"/>
+
         <activity android:name=".MapSearch"></activity>
         <activity android:name=".MapActivity"> <!--인텐트 필터 테스트 이후 MapSearch로 잘라내기할 것-->
             <intent-filter>
@@ -27,6 +33,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

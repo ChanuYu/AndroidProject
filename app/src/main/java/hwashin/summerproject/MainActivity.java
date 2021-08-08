@@ -1,7 +1,14 @@
 package hwashin.summerproject;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -20,9 +27,18 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import hwashin.summerproject.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
+
+    String[] permission_list = {
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.INTERNET
+    };
+
 
     private ActivityMainBinding binding;
 
@@ -43,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
+        checkPermission();
+
     }
 
     @Override
@@ -58,5 +76,17 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
         return true;
     }
+    public void checkPermission(){
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M){
+            return;
+        }
+        for(String permission : permission_list){
+            int chk = checkCallingOrSelfPermission(permission);
+            if(chk == PackageManager.PERMISSION_DENIED){
+                requestPermissions(permission_list,0);
+            }
+        }
+    }
+
 
 }

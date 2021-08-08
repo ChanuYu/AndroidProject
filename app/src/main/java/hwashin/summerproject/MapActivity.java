@@ -7,7 +7,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.TextView;
+
+import net.daum.mf.map.api.MapView;
 
 public class MapActivity extends AppCompatActivity {
 
@@ -21,7 +24,12 @@ public class MapActivity extends AppCompatActivity {
         //action.setDisplayHomeAsUpEnabled(false);
         //action.setDisplayShowHomeEnabled(false);
         //action.setDisplayShowTitleEnabled(false);
-        text1 = (TextView)findViewById(R.id.onquery);
+
+        //text1 = (TextView)findViewById(R.id.onquery);
+
+        MapView mapView = new MapView(this);
+        ViewGroup mapViewContainer = (ViewGroup)findViewById(R.id.map_view);
+        mapViewContainer.addView(mapView);
     }
 
     @Override
@@ -33,8 +41,8 @@ public class MapActivity extends AppCompatActivity {
         final SearchView search_view = (SearchView)search.getActionView();
         search_view  .setQueryHint("검색");
 
-        SearchViewListener listener = new SearchViewListener();
-        search_view.setOnQueryTextListener(listener);
+        //SearchViewListener listener = new SearchViewListener();
+        //search_view.setOnQueryTextListener(listener);
 
         return true;
     }
