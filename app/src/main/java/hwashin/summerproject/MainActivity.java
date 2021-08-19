@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
     String[] permission_list = {
             Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.INTERNET
     };
 
