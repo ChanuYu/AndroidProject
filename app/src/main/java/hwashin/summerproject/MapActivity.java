@@ -23,6 +23,8 @@ import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
+import java.util.ArrayList;
+
 public class MapActivity extends AppCompatActivity {
 
     String search_text;
@@ -32,6 +34,18 @@ public class MapActivity extends AppCompatActivity {
     public double latitude;
     public String currentLocation;
     private MapView mapView;
+
+    String[] names = {
+            "국제휘트니스", "컨디션피트니스", "지젤피트니스클럽", "벨로시티",
+            "지 스포츠 컴플렉스"
+    };
+
+    double[] lats = {
+        35.237212, 35.22067, 35.236374, 35.23721, 35.22948,
+    };
+    double[] lons = {
+        129.009564, 129.04031, 129.011210, 129.01130, 129.01287,
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +61,13 @@ public class MapActivity extends AppCompatActivity {
         getMyLocation();
         ViewGroup mapViewContainer = (ViewGroup)findViewById(R.id.map_view);
         mapViewContainer.addView(mapView);
+
+        BuildingLocation[] buildings = new BuildingLocation[5];
+        for(int i=0;i<5;i++){
+            buildings[i].name = names[i];
+            buildings[i].latitude = lats[i];
+            buildings[i].longitude = lons[i];
+        }
 
         MapPOIItem marker = new MapPOIItem();
         marker.setItemName("현재 위치");
@@ -86,6 +107,19 @@ public class MapActivity extends AppCompatActivity {
             text1.setText(search_text);
             //데이터베이스에서 해당 헬스장 검색하여 조회
             return false;
+        }
+    }
+
+    class BuildingLocation{
+        String name;
+        double latitude;
+        double longitude;
+
+        public BuildingLocation(){}
+        public BuildingLocation(String name, double lat, double lon){
+            this.name = name;
+            this.longitude = lon;
+            this.latitude = lat;
         }
     }
 
