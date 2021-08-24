@@ -30,7 +30,7 @@ public class MapActivity extends AppCompatActivity {
     String search_text;
     TextView text1;
     LocationManager locationManager;
-    public double longtitude;
+    public double longitude;
     public double latitude;
     public String currentLocation;
     private MapView mapView;
@@ -46,6 +46,8 @@ public class MapActivity extends AppCompatActivity {
     double[] lons = {
         129.009564, 129.04031, 129.011210, 129.01130, 129.01287,
     };
+    MapPOIItem[] markers = new MapPOIItem[5];
+    Building[] buildings = new Building[5];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,24 +60,26 @@ public class MapActivity extends AppCompatActivity {
         //text1 = (TextView)findViewById(R.id.onquery);
 
         mapView = new MapView(this);
-        getMyLocation();
         ViewGroup mapViewContainer = (ViewGroup)findViewById(R.id.map_view);
         mapViewContainer.addView(mapView);
 
-        BuildingLocation[] buildings = new BuildingLocation[5];
-        for(int i=0;i<5;i++){
-            buildings[i].name = names[i];
-            buildings[i].latitude = lats[i];
-            buildings[i].longitude = lons[i];
-        }
+        ThreadClass thread = new ThreadClass();
+        thread.start();
+
+        MapPoint mapPoint = MapPoint.mapPointWithGeoCoord(35.233691,129.013264);
+        //getMyLocation();  GPS기반 현위치로 화면 전환
+        mapView.setMapCenterPoint(mapPoint,true);
 
         MapPOIItem marker = new MapPOIItem();
-        marker.setItemName("현재 위치");
+
+        marker.setItemName("Current Location");
         marker.setTag(0);
-        marker.setMapPoint(MapPoint.mapPointWithCONGCoord(latitude,longtitude));
+        //marker.setMapPoint(MapPoint.mapPointWithCONGCoord(latitude,longtitude));
+        marker.setMapPoint(mapPoint);
         marker.setMarkerType(MapPOIItem.MarkerType.BluePin);
         marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
         mapView.addPOIItem(marker);
+
     }
 
     @Override
@@ -91,6 +95,33 @@ public class MapActivity extends AppCompatActivity {
         //search_view.setOnQueryTextListener(listener);
 
         return true;
+    }
+    class ThreadClass extends Thread{
+        @Override
+        public void run() {
+            for(int i=0;i<5;i++){
+                buildings[i] = new Building(names[i],lats[i],lons[i]);
+                markers[i] = new MapPOIItem();
+                markers[i].setItemName(buildings[i].name);
+                markers[i].setTag(i+1);
+                markers[i].setMarkerType(MapPOIItem.MarkerType.BluePin);
+                markers[i].setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
+                Log.d("test",markers[i].getItemName());
+            }
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    for(int i=0;i<5;i++){
+                        try{
+                            mapView.addPOIItem(markers[i]);
+                            Log.d("test",markers[i].getItemName());
+                        } catch (Exception e){
+                            Log.d("test","failed to add marker"+i);
+                        }
+                    }
+                }
+            });
+        }
     }
 
     class SearchViewListener implements SearchView.OnQueryTextListener{
@@ -110,13 +141,13 @@ public class MapActivity extends AppCompatActivity {
         }
     }
 
-    class BuildingLocation{
+    class Building{
         String name;
         double latitude;
         double longitude;
 
-        public BuildingLocation(){}
-        public BuildingLocation(String name, double lat, double lon){
+        public Building(){}
+        public Building(String name, double lat, double lon){
             this.name = name;
             this.longitude = lon;
             this.latitude = lat;
@@ -135,9 +166,9 @@ public class MapActivity extends AppCompatActivity {
             public void onLocationChanged(@NonNull Location location) {
                 Log.d("test","onLocationChanged, location: "+location);
                 latitude = location.getLatitude();
-                longtitude = location.getLongitude();
+                longitude = location.getLongitude();
 
-                setDaumMapCurrentLocation(latitude,longtitude);
+                setDaumMapCurrentLocation(latitude,longitude);
                 locationManager.removeUpdates(this);
             }
         };
@@ -148,9 +179,9 @@ public class MapActivity extends AppCompatActivity {
                 100, 1,mLocationListener);
 
     }
-    public void setDaumMapCurrentLocation(double latitude, double longtitude){
+    public void setDaumMapCurrentLocation(double latitude, double longitude){
         mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(latitude,
-                longtitude), true);
+                longitude), true);
         mapView.setZoomLevel(4,true);
         mapView.zoomIn(true);
 
@@ -160,7 +191,7 @@ public class MapActivity extends AppCompatActivity {
         MapPOIItem marker = new MapPOIItem();
         marker.setItemName("현재 위치");
         marker.setTag(0);
-        marker.setMapPoint(MapPoint.mapPointWithCONGCoord(latitude,longtitude));
+        marker.setMapPoint(MapPoint.mapPointWithCONGCoord(latitude,longitude));
         marker.setMarkerType(MapPOIItem.MarkerType.BluePin);
         marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
 
