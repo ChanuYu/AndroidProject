@@ -73,9 +73,18 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        Intent intent = new Intent(this,MapActivity.class);
-        startActivity(intent);
-        return true;
+        switch(item.getItemId()) {
+            case R.id.map_menu:
+                Intent intent = new Intent(this, MapActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.login_menu:
+                Intent intent2 = new Intent(this, LoginActivity.class);
+                startActivity(intent2);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
     public void checkPermission(){
         if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M){

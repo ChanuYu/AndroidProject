@@ -1,8 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ProjectPlainTextFileTypeManager">
-    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_goto_map.xml" />
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/summerprj/AndroidProject/app/src/main/res/layout/activity_join.xml" value="0.36614583333333334" />
+        <entry key="..\:/summerprj/AndroidProject/app/src/main/res/layout/activity_login.xml" value="0.36614583333333334" />
+        <entry key="..\:/summerprj/AndroidProject/app/src/main/res/layout/activity_main.xml" value="0.18009118541033434" />
+        <entry key="..\:/summerprj/AndroidProject/app/src/main/res/layout/activity_map.xml" value="0.18009118541033434" />
+        <entry key="..\:/summerprj/AndroidProject/app/src/main/res/layout/activity_map_search.xml" value="0.18009118541033434" />
+        <entry key="..\:/summerprj/AndroidProject/app/src/main/res/layout/fragment_conversation_list_list.xml" value="0.18009118541033434" />
+        <entry key="..\:/summerprj/AndroidProject/app/src/main/res/layout/fragment_home.xml" value="0.18009118541033434" />
+        <entry key="..\:/summerprj/AndroidProject/app/src/main/res/layout/fragment_join.xml" value="0.36614583333333334" />
+        <entry key="..\:/summerprj/AndroidProject/app/src/main/res/layout/fragment_login.xml" value="0.36614583333333334" />
+        <entry key="..\:/summerprj/AndroidProject/app/src/main/res/layout/fragment_notifications.xml" value="0.18009118541033434" />
+        <entry key="..\:/summerprj/AndroidProject/app/src/main/res/layout/fragment_profile.xml" value="0.18009118541033434" />
+        <entry key="..\:/summerprj/AndroidProject/app/src/main/res/menu/bottom_nav_menu.xml" value="0.29259259259259257" />
+        <entry key="..\:/summerprj/AndroidProject/app/src/main/res/menu/gps_menu.xml" value="0.36614583333333334" />
+        <entry key="..\:/summerprj/AndroidProject/app/src/main/res/menu/search_menu.xml" value="0.29259259259259257" />
+      </map>
+    </option>
   </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
