@@ -25,6 +25,7 @@
         android:id="@+id/loginbutton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="Loginbtn"
         android:text="Login" />
 
     <TextView
