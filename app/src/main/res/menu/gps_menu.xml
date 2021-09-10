@@ -7,6 +7,7 @@
         android:icon="@android:drawable/ic_dialog_map"
         android:title="map"
         app:showAsAction="always" />
+
     <item
         android:id="@+id/login_menu"
         android:icon="@android:drawable/ic_lock_power_off"

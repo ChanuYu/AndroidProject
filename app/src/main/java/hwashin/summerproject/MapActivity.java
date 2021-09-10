@@ -23,7 +23,6 @@ import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
-import java.util.ArrayList;
 
 public class MapActivity extends AppCompatActivity {
 

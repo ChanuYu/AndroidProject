@@ -1,8 +1,6 @@
 package hwashin.summerproject;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentContainerView;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -11,7 +9,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.Toast;
+
+
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -20,13 +20,12 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        text_id = (EditText)findViewById(R.id.text_id);
-        text_password = (EditText)findViewById(R.id.text_password);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
-
+        text_id = (EditText)findViewById(R.id.text_id);
+        text_password = (EditText)findViewById(R.id.text_password);
     }
 
 
@@ -34,21 +33,21 @@ public class LoginActivity extends AppCompatActivity {
         // 로그인 정보 일치할 시 로그인 되게 설정하기
 
 
+
         DBHelper helper = new DBHelper(this);
         SQLiteDatabase db = helper.getWritableDatabase();
 
         Cursor c = db.query("JoinTable",null,null,null,null,null,null);
 
-        /*
         String str_id = text_id.getText().toString();
-        String str_password = text_password.getText().toString();*/
+        String str_password = text_password.getText().toString();
 
         while(c.moveToNext()){
-            int id_pos = c.getColumnIndex("idx");
-            int password_pos = c.getColumnIndex("textData");
-            int name_pos = c.getColumnIndex("intData");
-            int email_pos = c.getColumnIndex("floatData");
-            int phone_pos = c.getColumnIndex("dateData");
+            int id_pos = c.getColumnIndex("id");
+            int password_pos = c.getColumnIndex("password");
+            int name_pos = c.getColumnIndex("name");
+            int email_pos = c.getColumnIndex("email");
+            int phone_pos = c.getColumnIndex("phone");
 
             String id_data= c.getString(id_pos);
             String password_data = c.getString(password_pos);
@@ -56,17 +55,33 @@ public class LoginActivity extends AppCompatActivity {
             String email_data = c.getString(email_pos);
             String phone_data = c.getString(phone_pos);
 
+            // 로그인 하기 전의 상태
+            Intent Mainintent = new Intent(getApplicationContext(), MainActivity.class);
+            Mainintent.putExtra("blogin","pass");
 
-            /*
-            if(str_id==id_data){
-                Log.d("test", str_id+"와"+id_data + "의 내용입니다.");
+            if(str_id.equals(id_data)){
+                if(str_password.equals(password_data)) {
+                    // 로그인 후 인텐트로 값 넘김
+
+
+                    Toast.makeText(getApplicationContext(), "로그인이 되었습니다.", Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    /*Intent Mainintent = new Intent(getApplicationContext(), MainActivity.class);*/
+                    Mainintent.putExtra("blogin","login");
+
+                    startActivity(intent);
+                }
             }
-            */
-
+            else{
+                Toast.makeText(getApplicationContext(), "아이디나 비밀번호가 다릅니다.", Toast.LENGTH_SHORT).show();
+            }
             db.close();
         }
 
-
+        /*binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        Toast.makeText(getApplicationContext(),"로그인이 되었습니다.",Toast.LENGTH_SHORT).show();*/
     }
     public void Joinbtn(View view){
         // 회원가입 프래그먼트로 이동하기
