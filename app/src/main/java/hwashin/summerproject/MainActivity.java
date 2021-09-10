@@ -78,15 +78,22 @@ public class MainActivity extends AppCompatActivity {
         inflater.inflate(R.menu.gps_menu,menu);
 
         // 로그인 됐을 때의 처리
-        // 1. 전역변수 설정해서 로그인 된 지 확인하기.
-        Intent Mainintent = getIntent();
-        String check = Mainintent.getStringExtra("blogin");
-        Toast.makeText(getApplicationContext(), check +"이 전달되었습니다", Toast.LENGTH_SHORT).show();
+        Intent intent = getIntent();
+        String check = intent.getStringExtra("blogin");
+        String check2 = "login";
 
-        if(check == "login") {
-            Toast.makeText(getApplicationContext(), "로그인이 되었습니다.", Toast.LENGTH_SHORT).show();
-            MenuItem item = menu.findItem(R.id.login_menu);
-            item.setVisible(false);
+        try{
+            int loginc = check.compareTo(check2);
+            if(loginc == 0 ) {
+                MenuItem item = menu.findItem(R.id.login_menu);
+                item.setVisible(false);
+            }
+            else{
+                Toast.makeText(getApplicationContext(), "아이디나 비밀번호가 다릅니다.", Toast.LENGTH_SHORT).show();
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
         }
 
         return true;

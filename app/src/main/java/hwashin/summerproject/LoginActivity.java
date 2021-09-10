@@ -55,21 +55,14 @@ public class LoginActivity extends AppCompatActivity {
             String email_data = c.getString(email_pos);
             String phone_data = c.getString(phone_pos);
 
-            // 로그인 하기 전의 상태
-            Intent Mainintent = new Intent(getApplicationContext(), MainActivity.class);
-            Mainintent.putExtra("blogin","pass");
 
             if(str_id.equals(id_data)){
                 if(str_password.equals(password_data)) {
                     // 로그인 후 인텐트로 값 넘김
-
-
                     Toast.makeText(getApplicationContext(), "로그인이 되었습니다.", Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    /*Intent Mainintent = new Intent(getApplicationContext(), MainActivity.class);*/
-                    Mainintent.putExtra("blogin","login");
-
+                    intent.putExtra("blogin","login");
                     startActivity(intent);
                 }
             }
@@ -79,9 +72,6 @@ public class LoginActivity extends AppCompatActivity {
             db.close();
         }
 
-        /*binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-        Toast.makeText(getApplicationContext(),"로그인이 되었습니다.",Toast.LENGTH_SHORT).show();*/
     }
     public void Joinbtn(View view){
         // 회원가입 프래그먼트로 이동하기

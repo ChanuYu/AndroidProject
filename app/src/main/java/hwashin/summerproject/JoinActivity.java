@@ -50,9 +50,7 @@ public class JoinActivity extends AppCompatActivity {
 
         db.insert("JoinTable",null,cv1);
 
-
         db.close();
-        //Toast.makeText(getApplicationContext(),"아이디가 "+str_id+"로 회원가입이 완료되었습니다.",Toast.LENGTH_SHORT).show();
         onBackPressed();
     }
 
